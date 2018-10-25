@@ -1,5 +1,6 @@
 import React from 'react'
 // import * as BooksAPI from './BooksAPI'
+import { Link, Route } from 'react-router-dom'
 import BookShelf from './BookShelf'
 import SearchBooks from './SearchBooks'
 import './App.css'
@@ -24,18 +25,10 @@ class BooksApp extends React.Component {
     ]
   }
 
-  changeShowSearchPage = (bool) => {
-    this.setState({showSearchPage: bool})
-
-  }
-
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <SearchBooks showSearch={this.changeShowSearchPage} />
-
-        ) : (
+        <Route exact path='/' render={()=>(
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
@@ -55,10 +48,12 @@ class BooksApp extends React.Component {
               </div>
             </div>
             <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+              <Link to='/search'>Add a book</Link>
             </div>
           </div>
-        )}
+        )}/>
+
+        <Route exact path='/search' render={<SearchBooks />}/>
       </div>
     )
   }
