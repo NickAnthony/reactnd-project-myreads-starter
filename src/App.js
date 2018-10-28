@@ -57,7 +57,7 @@ class BooksApp extends React.Component {
               <div>
                 <BookShelf title={this.state.bookShelfTitles.currentlyReading}
                   books={this.state.books.filter((book) => (book.shelf === "currentlyReading"))}
-                  handleChangeShelf={this.handleChangeShelf}
+                  changeShelf={this.handleChangeShelf}
                 />
                 <BookShelf title={this.state.bookShelfTitles.wantToRead}
                   books={this.state.books.filter((book) => (book.shelf === "wantToRead"))}

@@ -13,7 +13,7 @@ class BookShelf extends Component {
                 <div className="book">
                   <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}/>
-                    <ShelfChanger changeShelf={this.props.handleChangeShelf} book={book}/>
+                    <ShelfChanger changeShelf={this.props.changeShelf} book={book}/>
                   </div>
                   <div className="book-title">{book.title}</div>
                   { book.authors.map((author) =>
