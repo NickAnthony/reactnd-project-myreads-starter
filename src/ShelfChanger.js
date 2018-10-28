@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import { update } from './BooksAPI'
 
 class ShelfChanger extends Component {
-  handleUpdateShelf = (new_shelf) => {
-    update(this.props.book, new_shelf).then(res => {
-        console.log(res)
-      }
-    )
+  handleUpdateShelf = (newShelf) => {
+    update(this.props.book, newShelf)
+    this.props.changeShelf(this.props.book.id, newShelf)
   }
+  
   render() {
     return(
       <div className="book-shelf-changer">
