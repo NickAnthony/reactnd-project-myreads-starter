@@ -9,14 +9,16 @@ class BookShelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             { this.props.books.map((book) =>
-              <li>
+              <li key={book.title}>
                 <div className="book">
                   <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("' + book.coverURL + '")' }}/>
-                    <ShelfChanger />
+                    <ShelfChanger changeShelf={this.props.changeShelf} bookTitle={book.title}/>
                   </div>
                   <div className="book-title">{book.title}</div>
-                  <div className="book-authors">{book.author}</div>
+                  { book.authors.map((author) =>
+                    <div key={book + author} className="book-authors">{author}</div>
+                  )}
                 </div>
               </li>
             )}
