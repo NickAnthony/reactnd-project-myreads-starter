@@ -4,14 +4,21 @@ import { update } from './BooksAPI'
 class ShelfChanger extends Component {
   handleUpdateShelf = (newShelf) => {
     update(this.props.book, newShelf)
-    this.props.changeShelf(this.props.book.id, newShelf)
+    this.props.changeShelf(this.props.book, newShelf)
+  }
+  handleSelectValue = () => {
+    if (this.props.book.shelf) {
+      return (this.props.book.shelf)
+    } else {
+      return ("none")
+    }
   }
 
   render() {
     return(
       <div className="book-shelf-changer">
         <select
-          value={this.props.book.shelf}
+          value={this.handleSelectValue()}
           onChange={(e) => this.handleUpdateShelf(e.target.value)}>
           <option value="move" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>

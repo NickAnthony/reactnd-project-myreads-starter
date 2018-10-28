@@ -25,13 +25,20 @@ class BooksApp extends React.Component {
   }
 
   // Change the shelf of the current book
-  handleChangeShelf = (bookID, newShelf) => {
+  handleChangeShelf = (changedBook, newShelf) => {
+    var exists = false
     const updatedBookList = this.state.books.map((book) => {
-      if (bookID === book.id) {
+      if (changedBook.id === book.id) {
+        // book is already in state - update it
         book.shelf = newShelf
+        exists = true
       }
       return(book)
     })
+    // If book does not exist in state, add it to state
+    if (!exists) {
+      updatedBookList.push(changedBook)
+    }
     this.setState({
       books: updatedBookList
     })
@@ -67,7 +74,6 @@ class BooksApp extends React.Component {
                   books={this.state.books.filter((book) => (book.shelf === "read"))}
                   changeShelf={this.handleChangeShelf}
                 />
-
               </div>
             </div>
             <div className="open-search">
@@ -77,7 +83,7 @@ class BooksApp extends React.Component {
         )}/>
 
         <Route exact path='/search' render={()=>(
-          <SearchBooks books={this.state.books} />
+          <SearchBooks changeShelf={this.handleChangeShelf}/>
         )}/>
       </div>
     )
