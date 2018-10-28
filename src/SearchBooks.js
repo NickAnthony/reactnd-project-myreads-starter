@@ -6,22 +6,47 @@ import ShelfChanger from './ShelfChanger'
 class SearchBooks extends Component {
   state = {
     query: '',
-    searchResults: []
+    searchResults: [],
+    showResults: false
   }
 
   updateQuery = (new_query) => {
     this.setState({
       query: new_query
     })
+    if (new_query.length >= 3) {
+      search(new_query).then(
+        response => {
+          if (response.error) {
+            this.setState({
+              searchResults: [],
+              showResults: false
+            })
+          } else {
+            this.setState({
+              searchResults: response,
+              showResults: true
+            })
+          }
+        }
+      );
+    }
   }
   handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       search(this.state.query).then(
         response => {
-          console.log(response)
-          this.setState({
-            searchResults: response
-          })
+          if (response.error) {
+            this.setState({
+              searchResults: [],
+              showResults: false
+            })
+          } else {
+            this.setState({
+              searchResults: response,
+              showResults: true
+            })
+          }
         }
       );
     }
@@ -50,7 +75,8 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            { this.state.searchResults.map((book, index) =>
+            { !(this.state.showResults) && <div> No Results </div> }
+            { this.state.showResults && this.state.searchResults.map((book, index) =>
               <li key={index}>
                 <div className="book">
                   <div className="book-top">
