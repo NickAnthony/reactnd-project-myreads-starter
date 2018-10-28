@@ -10,7 +10,7 @@ class SearchBooks extends Component {
     showResults: false
   }
 
-  updateQuery = (new_query) => {
+  hanldeUpdateQuery = (new_query) => {
     this.setState({
       query: new_query
     })
@@ -61,7 +61,7 @@ class SearchBooks extends Component {
             <input type="text"
               placeholder="Search by title or author"
               value={this.state.query}
-              onChange={(e) => this.updateQuery(e.target.value)}
+              onChange={(e) => this.hanldeUpdateQuery(e.target.value)}
               onKeyPress={this.handleKeyPress}/>
           </div>
         </div>
