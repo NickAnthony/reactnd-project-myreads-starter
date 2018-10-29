@@ -3,6 +3,13 @@ import PropTypes from 'prop-types'
 import ShelfChanger from './ShelfChanger'
 
 class BookShelf extends Component {
+  getThumbnail = (book) => {
+    if (book.imageLinks && book.imageLinks.thumbnail) {
+      return book.imageLinks.thumbnail
+    } else {
+      return ""
+    }
+  }
   render() {
     return(
       <div className="bookshelf">
@@ -13,11 +20,11 @@ class BookShelf extends Component {
               <li key={book.title}>
                 <div className="book">
                   <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}/>
+                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("' + this.getThumbnail(book) + '")' }}/>
                     <ShelfChanger changeShelf={this.props.changeShelf} book={book}/>
                   </div>
                   <div className="book-title">{book.title}</div>
-                  { book.authors.map((author) =>
+                  { book.authors && book.authors.map((author) =>
                     <div key={book + author} className="book-authors">{author}</div>
                   )}
                 </div>

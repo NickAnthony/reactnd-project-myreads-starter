@@ -53,6 +53,14 @@ class SearchBooks extends Component {
     }
   }
 
+  getThumbnail = (book) => {
+    if (book.imageLinks && book.imageLinks.thumbnail) {
+      return book.imageLinks.thumbnail
+    } else {
+      return ""
+    }
+  }
+
   render() {
     return(
       <div className="search-books">
@@ -73,11 +81,11 @@ class SearchBooks extends Component {
               <li key={index}>
                 <div className="book">
                   <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("' + book.imageLinks.thumbnail + '")' }}/>
+                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("' + this.getThumbnail(book) + '")' }}/>
                     <ShelfChanger changeShelf={this.props.changeShelf} book={book}/>
                   </div>
                   <div className="book-title">{book.title}</div>
-                  { book.authors.map((author) =>
+                  { book.authors && book.authors.map((author) =>
                     <div key={book + author} className="book-authors">{author}</div>
                   )}
                 </div>
