@@ -67,7 +67,7 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            { !(this.state.showResults) && <div> No Results </div> }
+            { !(this.state.showResults) && <div> {"\"" + this.state.query + "\" returned no results." } </div> }
             { this.state.showResults && this.state.searchResults.map((book, index) =>
               <li key={index}>
                 <div className="book">
