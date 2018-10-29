@@ -25,12 +25,14 @@ class BooksApp extends React.Component {
 
   // Change the shelf of the current book
   handleChangeShelf = (changedBook, newShelf) => {
+    // The local book ref we've retrieved does not have the shelf update
+    changedBook.shelf = newShelf
     var exists = false
     const updatedBookList = this.state.books.map((book) => {
       if (changedBook.id === book.id) {
-        // book is already in state - update it
-        book.shelf = newShelf
+        // Book exists in state - replace it
         exists = true
+        return changedBook
       }
       return(book)
     })
