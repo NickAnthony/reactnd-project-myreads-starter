@@ -1,9 +1,8 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 import { Link, Route } from 'react-router-dom'
 import BookShelf from './BookShelf'
 import SearchBooks from './SearchBooks'
-import { get, getAll } from './BooksAPI'
 import './App.css'
 
 class BooksApp extends React.Component {
@@ -45,7 +44,7 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    getAll().then(bookList => {
+    BooksAPI.getAll().then(bookList => {
       this.setState({
         books: bookList
       })

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { get, getAll, update, search } from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 import ShelfChanger from './ShelfChanger'
 
 class SearchBooks extends Component {
@@ -15,7 +15,7 @@ class SearchBooks extends Component {
       query: new_query
     })
     if (new_query.length >= 3) {
-      search(new_query).then(
+      BooksAPI.search(new_query).then(
         response => {
           if (response.error) {
             this.setState({
@@ -34,7 +34,7 @@ class SearchBooks extends Component {
   }
   handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      search(this.state.query).then(
+      BooksAPI.search(this.state.query).then(
         response => {
           if (response.error) {
             this.setState({
