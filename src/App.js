@@ -15,12 +15,11 @@ class BooksApp extends React.Component {
      */
     showSearchPage: false,
     books: [],
-    bookShelfTitles: {
-      currentlyReading: "Currently Reading",
-      wantToRead: "Want to Read",
-      read: "Read",
-      none: ""
-    }
+    bookShelfTitles: [
+      { id: "currentlyReading", title: "Currently Reading" },
+      { id: "wantToRead", title: "Want to Read" },
+      { id: "read", title: "Read" }
+    ]
   }
 
   // Change the shelf of the current book
@@ -63,18 +62,13 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <BookShelf title={this.state.bookShelfTitles.currentlyReading}
-                  books={this.state.books.filter((book) => (book.shelf === "currentlyReading"))}
-                  changeShelf={this.handleChangeShelf}
-                />
-                <BookShelf title={this.state.bookShelfTitles.wantToRead}
-                  books={this.state.books.filter((book) => (book.shelf === "wantToRead"))}
-                  changeShelf={this.handleChangeShelf}
-                />
-                <BookShelf title={this.state.bookShelfTitles.read}
-                  books={this.state.books.filter((book) => (book.shelf === "read"))}
-                  changeShelf={this.handleChangeShelf}
-                />
+                { this.state.bookShelfTitles.map((bookShelf) =>
+                  <BookShelf key={bookShelf.id}
+                    title={bookShelf.title}
+                    books={this.state.books.filter((book) => (book.shelf === bookShelf.id))}
+                    changeShelf={this.handleChangeShelf}
+                  />
+                )}
               </div>
             </div>
             <div className="open-search">
