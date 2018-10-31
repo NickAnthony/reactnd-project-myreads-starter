@@ -3,6 +3,7 @@ import * as BooksAPI from './BooksAPI'
 import { Link, Route } from 'react-router-dom'
 import BookShelf from './BookShelf'
 import SearchBooks from './SearchBooks'
+import ShelfManager from './ShelfManager'
 import './App.css'
 
 class BooksApp extends React.Component {
@@ -79,6 +80,10 @@ class BooksApp extends React.Component {
 
         <Route exact path='/search' render={()=>(
           <SearchBooks changeShelf={this.handleChangeShelf}/>
+        )}/>
+
+        <Route exact path='/manageshelves' render={()=>(
+          <ShelfManager shelves={this.bookShelfTitles} />
         )}/>
       </div>
     )
