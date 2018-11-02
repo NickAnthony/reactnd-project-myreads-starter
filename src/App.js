@@ -23,6 +23,22 @@ class BooksApp extends React.Component {
     ]
   }
 
+  handleDeleteShelf = (shelfToDelete) => {
+    this.setState((prevState) => ({
+      bookShelfTitles: prevState.bookShelfTitles.filter(
+        (shelf) => { return (shelf.id !== shelfToDelete.id) }
+      )
+    }));
+  }
+
+  handleAddShelf = (newShelf) => {
+    var updatedShelfList = this.state.bookShelfTitles.slice()
+    updatedShelfList.push(newShelf)
+    this.setState({
+      bookShelfTitles: updatedShelfList
+    })
+  }
+
   // Change the shelf of the current book
   handleChangeShelf = (changedBook, newShelf) => {
     // The local book ref we've retrieved does not have the shelf update
@@ -83,7 +99,10 @@ class BooksApp extends React.Component {
         )}/>
 
         <Route exact path='/manageshelves' render={()=>(
-          <ShelfManager shelves={this.state.bookShelfTitles} />
+          <ShelfManager
+            shelves={this.state.bookShelfTitles}
+            addShelf={this.handleAddShelf}
+            deleteShelf={this.handleDeleteShelf} />
         )}/>
       </div>
     )
