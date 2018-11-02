@@ -2,8 +2,26 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 class ShelfManager extends Component {
+  state = {
+    newShelfName: ''
+  }
+  handleAddShelf = () => {
+    var newShelf = {
+      id: this.state.newShelfName.toString().toLowerCase().split(' ').join(''),
+      title: this.state.newShelfName
+    }
+    // Check that shelf doesn't already exist
+    if ( this.props.shelves.filter((shelf) => (shelf.id === newShelf.id)) ) {
+      console.log("Shelf exists!")
+    }
+    this.updateNewShelfName('')
+  }
+  updateNewShelfName = (newName) => {
+    this.setState({
+      newShelfName: newName
+    })
+  }
   render() {
-    console.log(this.props)
     return(
       <div>
       <div className="list-books-title">
@@ -21,8 +39,14 @@ class ShelfManager extends Component {
           )}
           <li className="shelf-list-item">
             <input className="new-shelf-input"
-              type="text"  placeholder="New shelf name"/>
-            <div className="add-shelf"/>
+              type="text"
+              placeholder="New shelf name"
+              value={this.newShelfName}
+              onChange={(e) => this.updateNewShelfName(e.target.value)}
+              />
+            <div
+              className="add-shelf"
+              onClick={this.handleAddShelf}/>
           </li>
         </ul>
       </div>
