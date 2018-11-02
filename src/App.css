@@ -119,7 +119,9 @@ body, .app {
 }
 
 .delete-shelf {
-  display: block;
+  display: inline-block;
+  margin-top: auto;
+  margin-bottom: auto;
   width: 50px;
   height: 53px;
   background: white;
@@ -130,14 +132,31 @@ body, .app {
   font-size: 0;
 }
 
+.new-shelf-input {
+  border: 1px solid #BDBDBD;
+  border-radius: 5px;
+}
+
+.shelf-list-item {
+  padding: 20px;
+  margin: 5px;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
 .shelf-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  width: 100%;
 
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  flex-direction: column;
 }
 
 

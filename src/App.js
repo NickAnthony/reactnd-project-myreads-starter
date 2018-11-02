@@ -83,7 +83,7 @@ class BooksApp extends React.Component {
         )}/>
 
         <Route exact path='/manageshelves' render={()=>(
-          <ShelfManager shelves={this.bookShelfTitles} />
+          <ShelfManager shelves={this.state.bookShelfTitles} />
         )}/>
       </div>
     )
