@@ -135,6 +135,7 @@ body, .app {
 .new-shelf-input {
   border: 1px solid #BDBDBD;
   border-radius: 5px;
+  font-size: 20px;
 }
 
 .shelf-list-item {
