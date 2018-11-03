@@ -62,6 +62,26 @@ body, .app {
   font-size: 0;
 }
 
+.open-manage-shelves {
+  position: fixed;
+  left: 25px;
+  bottom: 25px;
+  display: block;
+  padding: 8px;
+  border-radius: 15px;
+  background: #2e7d32;
+  color: #FFFFFF;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 28px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  font-size: 25px;
+}
+
+.link {
+  color: #FFFFFF;
+}
+
 /* search page */
 
 .search-books-bar {

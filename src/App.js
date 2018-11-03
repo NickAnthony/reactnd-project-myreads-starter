@@ -92,6 +92,13 @@ class BooksApp extends React.Component {
             <div className="open-search">
               <Link to='/search'/>
             </div>
+            <div className="open-manage-shelves">
+              <Link to='/manageshelves'
+                className="link"
+                style={{textDecoration: "none"}}>
+                  Manage Shelves
+              </Link>
+            </div>
           </div>
         )}/>
 
