@@ -16,7 +16,7 @@ class BooksApp extends React.Component {
      */
     showSearchPage: false,
     books: [],
-    bookShelfTitles: [
+    shelves: [
       { id: "currentlyReading", title: "Currently Reading" },
       { id: "wantToRead", title: "Want to Read" },
       { id: "read", title: "Read" }
@@ -25,17 +25,17 @@ class BooksApp extends React.Component {
 
   handleDeleteShelf = (shelfToDelete) => {
     this.setState((prevState) => ({
-      bookShelfTitles: prevState.bookShelfTitles.filter(
+      shelves: prevState.shelves.filter(
         (shelf) => { return (shelf.id !== shelfToDelete.id) }
       )
     }));
   }
 
   handleAddShelf = (newShelf) => {
-    var updatedShelfList = this.state.bookShelfTitles.slice()
+    var updatedShelfList = this.state.shelves.slice()
     updatedShelfList.push(newShelf)
     this.setState({
-      bookShelfTitles: updatedShelfList
+      shelves: updatedShelfList
     })
   }
 
@@ -79,11 +79,12 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                { this.state.bookShelfTitles.map((bookShelf) =>
+                { this.state.shelves.map((bookShelf) =>
                   <BookShelf key={bookShelf.id}
                     title={bookShelf.title}
                     books={this.state.books.filter((book) => (book.shelf === bookShelf.id))}
                     changeShelf={this.handleChangeShelf}
+                    shelves={this.state.shelves}
                   />
                 )}
               </div>
@@ -100,7 +101,7 @@ class BooksApp extends React.Component {
 
         <Route exact path='/manageshelves' render={()=>(
           <ShelfManager
-            shelves={this.state.bookShelfTitles}
+            shelves={this.state.shelves}
             addShelf={this.handleAddShelf}
             deleteShelf={this.handleDeleteShelf} />
         )}/>

@@ -21,7 +21,10 @@ class BookShelf extends Component {
                 <div className="book">
                   <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("' + this.getThumbnail(book) + '")' }}/>
-                    <ShelfChanger changeShelf={this.props.changeShelf} book={book}/>
+                    <ShelfChanger
+                      changeShelf={this.props.changeShelf}
+                      book={book}
+                      shelves={this.props.shelves}/>
                   </div>
                   <div className="book-title">{book.title}</div>
                   { book.authors && book.authors.map((author) =>

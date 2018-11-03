@@ -11,8 +11,10 @@ class ShelfManager extends Component {
       title: this.state.newShelfName
     }
     // Check that shelf doesn't already exist
-    if ( this.props.shelves.filter((shelf) => (shelf.id === newShelf.id)) ) {
-      console.log("Shelf exists!")
+    if ( this.props.shelves.filter((shelf) => (shelf.id === newShelf.id)).length > 0 ) {
+      console.log("Shelf exists: ", newShelf.id)
+    } else {
+      this.props.addShelf(newShelf)
     }
     this.updateNewShelfName('')
   }
@@ -34,14 +36,16 @@ class ShelfManager extends Component {
               key={shelf.id}
               className="shelf-list-item">
               <h2>{shelf.title}</h2>
-              <div className="delete-shelf"/>
+              <div
+                className="delete-shelf"
+                onClick={() => this.props.deleteShelf(shelf)}/>
             </li>
           )}
           <li className="shelf-list-item">
             <input className="new-shelf-input"
               type="text"
               placeholder="New shelf name"
-              value={this.newShelfName}
+              value={this.state.newShelfName}
               onChange={(e) => this.updateNewShelfName(e.target.value)}
               />
             <div

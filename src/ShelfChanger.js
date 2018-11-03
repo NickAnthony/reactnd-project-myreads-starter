@@ -22,9 +22,13 @@ class ShelfChanger extends Component {
           value={this.handleSelectValue()}
           onChange={(e) => this.handleUpdateShelf(e.target.value)}>
           <option value="move" disabled>Move to...</option>
-          <option value="currentlyReading">Currently Reading</option>
-          <option value="wantToRead">Want to Read</option>
-          <option value="read">Read</option>
+          { this.props.shelves.map((shelf) =>
+            <option
+              key={shelf.id}
+              value={shelf.id}>
+              {shelf.title}
+            </option>
+          )}
           <option value="none">None</option>
         </select>
       </div>
