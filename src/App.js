@@ -32,6 +32,12 @@ class BooksApp extends React.Component {
   }
 
   handleAddShelf = (newShelf) => {
+    if (this.state.shelves.filter((shelf) => (shelf.id === newShelf.id)) > 0){
+      return
+    }
+    if ((!newShelf.id) || (!newShelf.title)) {
+      return
+    }
     var updatedShelfList = this.state.shelves.slice()
     updatedShelfList.push(newShelf)
     this.setState({
@@ -65,6 +71,10 @@ class BooksApp extends React.Component {
     BooksAPI.getAll().then(bookList => {
       this.setState({
         books: bookList
+      })
+      bookList.map((book) => {
+        this.handleAddShelf(book.shelf)
+        console.log(book.shelf)
       })
     })
   }
