@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { update } from './BooksAPI'
 
+/* ShelfChanger: The drop down shelf changer component
+*/
 class ShelfChanger extends Component {
   handleUpdateShelf = (newShelf) => {
     update(this.props.book, newShelf)

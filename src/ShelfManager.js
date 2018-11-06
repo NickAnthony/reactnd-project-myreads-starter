@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+/* ShelfManager: The Create/Delete Shelf page, that allows users to manage
+their shelves
+*/
 class ShelfManager extends Component {
   state = {
     newShelfName: ''
   }
   handleAddShelf = () => {
+    // Shelf id is combined name
     var newShelf = {
       id: this.state.newShelfName.toString().toLowerCase().split(' ').join(''),
       title: this.state.newShelfName

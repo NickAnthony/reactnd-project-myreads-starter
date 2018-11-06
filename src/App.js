@@ -6,14 +6,10 @@ import SearchBooks from './SearchBooks'
 import ShelfManager from './ShelfManager'
 import './App.css'
 
+/* BooksApp: Base App Component that handles home page and routing
+*/
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
     showSearchPage: false,
     books: [],
     shelves: [
@@ -32,7 +28,8 @@ class BooksApp extends React.Component {
   }
 
   handleAddShelf = (newShelf) => {
-    if (this.state.shelves.filter((shelf) => (shelf.id === newShelf.id)) > 0){
+    // Check if shelf already exists
+    if (this.state.shelves.filter((shelf) => (shelf.id === newShelf.id)) > 0) {
       return
     }
     if ((!newShelf.id) || (!newShelf.title)) {
@@ -68,6 +65,7 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
+    // If books were not supplied in props, go get them from server
     BooksAPI.getAll().then(bookList => {
       this.setState({
         books: bookList

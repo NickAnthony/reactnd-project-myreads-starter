@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import ShelfChanger from './ShelfChanger'
 
+/* SearchBooks: The Search Page within app
+*/
 class SearchBooks extends Component {
   state = {
     query: '',
@@ -16,6 +18,7 @@ class SearchBooks extends Component {
     this.setState({
       query: new_query
     })
+    // Only search if query is long enough
     if (new_query.length >= 3) {
       BooksAPI.search(new_query).then(
         response => {
@@ -36,6 +39,7 @@ class SearchBooks extends Component {
       );
     }
   }
+  // Execute search on enter
   handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       BooksAPI.search(this.state.query).then(
@@ -57,6 +61,7 @@ class SearchBooks extends Component {
       );
     }
   }
+  // Generate a list of recommended books based on current list
   generateRecBooks = (bookList) => {
     if (this.state.query !== '' || bookList.length === 0) {
       return
@@ -89,6 +94,7 @@ class SearchBooks extends Component {
   }
 
   componentDidMount() {
+    // If the book list was not supplied in props, query server for book list
     if (this.props.books.length > 0) {
       this.generateRecBooks(this.props.books.slice());
     } else {
@@ -96,7 +102,6 @@ class SearchBooks extends Component {
         this.generateRecBooks(bookList)
       });
     }
-
   }
 
   render() {

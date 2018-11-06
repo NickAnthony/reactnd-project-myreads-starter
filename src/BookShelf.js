@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ShelfChanger from './ShelfChanger'
 
+/* BookShelf: Component that represents one unique bookshelf
+*/
 class BookShelf extends Component {
   getThumbnail = (book) => {
     if (book.imageLinks && book.imageLinks.thumbnail) {
