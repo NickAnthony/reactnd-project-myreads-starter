@@ -65,14 +65,14 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    // If books were not supplied in props, go get them from server
+    // Get book list from server
     BooksAPI.getAll().then(bookList => {
       this.setState({
         books: bookList
       })
-      bookList.map((book) => {
+      for (var book in bookList) {
         this.handleAddShelf(book.shelf)
-      })
+      }
     })
   }
 
