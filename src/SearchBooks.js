@@ -8,7 +8,8 @@ class SearchBooks extends Component {
   state = {
     query: '',
     searchResults: [],
-    showResults: false
+    showResults: false,
+    showRecommended: false
   }
 
   hanldeUpdateQuery = (new_query) => {
@@ -21,12 +22,14 @@ class SearchBooks extends Component {
           if (response.error) {
             this.setState({
               searchResults: [],
-              showResults: false
+              showResults: false,
+              showRecommended: false
             })
           } else {
             this.setState({
               searchResults: response,
-              showResults: true
+              showResults: true,
+              showRecommended: false
             })
           }
         }
@@ -40,16 +43,44 @@ class SearchBooks extends Component {
           if (response.error) {
             this.setState({
               searchResults: [],
-              showResults: false
+              showResults: false,
+              showRecommended: false
             })
           } else {
             this.setState({
               searchResults: response,
-              showResults: true
+              showResults: true,
+              showRecommended: false
             })
           }
         }
       );
+    }
+  }
+  generateRecBooks = () => {
+    if (this.state.query !== '' || this.props.books.length === 0) {
+      return
+    }
+    var bookList = this.props.books.slice()
+    console.log("bookList: ", bookList)
+    // const recommendedResults = []
+    var tries = 0
+    while (tries < 5) {
+      const randBookIndex = Math.floor(Math.random()*(bookList.length-1))
+      BooksAPI.search(bookList[randBookIndex].title).then(res => {
+        console.log("res :", res)
+        console.log("searchResults: ", this.state.searchResults)
+        if (res.length > 0 && this.state.searchResults.length === 0) {
+          console.log("Set state!")
+          this.setState({
+            searchResults: res,
+            showResults: true,
+            showRecommended: true
+          })
+
+        }
+      });
+      tries++
     }
   }
 
@@ -59,6 +90,10 @@ class SearchBooks extends Component {
     } else {
       return ""
     }
+  }
+
+  componentDidMount() {
+    this.generateRecBooks()
   }
 
   render() {
@@ -75,6 +110,7 @@ class SearchBooks extends Component {
           </div>
         </div>
         <div className="search-books-results">
+          { (this.state.showRecommended) && <div className='recommended-text'> "Have you considered..." </div> }
           <ol className="books-grid">
             { !(this.state.showResults) && <div> {"\"" + this.state.query + "\" returned no results." } </div> }
             { this.state.showResults && this.state.searchResults.map((book, index) =>
@@ -82,7 +118,10 @@ class SearchBooks extends Component {
                 <div className="book">
                   <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: 'url("' + this.getThumbnail(book) + '")' }}/>
-                    <ShelfChanger changeShelf={this.props.changeShelf} book={book}/>
+                    <ShelfChanger
+                      changeShelf={this.props.changeShelf}
+                      book={book}
+                      shelves={this.props.shelves}/>
                   </div>
                   <div className="book-title">{book.title}</div>
                   { book.authors && book.authors.map((author) =>

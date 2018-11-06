@@ -123,6 +123,14 @@ body, .app {
   padding: 80px 10px 20px;
 }
 
+.recommended-text {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 20;
+}
+
 /* Shlef Manager Page */
 
 .add-shelf {

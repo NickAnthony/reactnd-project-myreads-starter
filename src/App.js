@@ -74,7 +74,6 @@ class BooksApp extends React.Component {
       })
       bookList.map((book) => {
         this.handleAddShelf(book.shelf)
-        console.log(book.shelf)
       })
     })
   }
@@ -113,7 +112,10 @@ class BooksApp extends React.Component {
         )}/>
 
         <Route exact path='/search' render={()=>(
-          <SearchBooks changeShelf={this.handleChangeShelf}/>
+          <SearchBooks
+            changeShelf={this.handleChangeShelf}
+            books={this.state.books}
+            shelves={this.state.shelves}/>
         )}/>
 
         <Route exact path='/manageshelves' render={()=>(
