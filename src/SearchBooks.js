@@ -57,21 +57,17 @@ class SearchBooks extends Component {
       );
     }
   }
-  generateRecBooks = () => {
-    if (this.state.query !== '' || this.props.books.length === 0) {
+  generateRecBooks = (bookList) => {
+    if (this.state.query !== '' || bookList.length === 0) {
       return
     }
-    var bookList = this.props.books.slice()
-    console.log("bookList: ", bookList)
-    // const recommendedResults = []
     var tries = 0
     while (tries < 5) {
       const randBookIndex = Math.floor(Math.random()*(bookList.length-1))
-      BooksAPI.search(bookList[randBookIndex].title).then(res => {
-        console.log("res :", res)
-        console.log("searchResults: ", this.state.searchResults)
+      // Query based on first author's last name
+      const authorLastName = bookList[randBookIndex].authors[0].split(" ").pop()
+      BooksAPI.search(authorLastName).then(res => {
         if (res.length > 0 && this.state.searchResults.length === 0) {
-          console.log("Set state!")
           this.setState({
             searchResults: res,
             showResults: true,
@@ -93,7 +89,14 @@ class SearchBooks extends Component {
   }
 
   componentDidMount() {
-    this.generateRecBooks()
+    if (this.props.books.length > 0) {
+      this.generateRecBooks(this.props.books.slice());
+    } else {
+      BooksAPI.getAll().then(bookList => {
+        this.generateRecBooks(bookList)
+      });
+    }
+
   }
 
   render() {
