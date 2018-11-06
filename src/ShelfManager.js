@@ -26,10 +26,17 @@ class ShelfManager extends Component {
   render() {
     return(
       <div>
-      <div className="list-books-title">
-        <h1>MyShelves</h1>
-      </div>
+        <div className="list-books-title">
+          <h1>MyShelves</h1>
+        </div>
         <Link to='/' className="close-search"/>
+        <div className="warning-message"> Warning, this feature is in beta and
+          shelf changes may will not be reflected unless you add
+          a book to your new shelf before refreshing.
+        </div>
+        <div className="warning-message">
+          Use with caution.
+        </div>
         <ul className="shelf-list">
           { this.props.shelves.map((shelf) =>
             <li

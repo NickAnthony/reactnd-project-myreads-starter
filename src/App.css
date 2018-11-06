@@ -189,6 +189,15 @@ body, .app {
   flex-direction: column;
 }
 
+.warning-message {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 30px !important;
+  color: #f44336;
+}
+
 
 /* books grid */
 
