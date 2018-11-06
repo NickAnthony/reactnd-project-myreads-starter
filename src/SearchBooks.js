@@ -110,9 +110,9 @@ class SearchBooks extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          { (this.state.showRecommended) && <div className='recommended-text'> "Have you considered..." </div> }
+          { (this.state.showRecommended) && <div className='result-message'> "Have you considered..." </div> }
           <ol className="books-grid">
-            { !(this.state.showResults) && <div> {"\"" + this.state.query + "\" returned no results." } </div> }
+            { !(this.state.showResults) && <div className='result-message'> {"\"" + this.state.query + "\" returned no results." } </div> }
             { this.state.showResults && this.state.searchResults.map((book, index) =>
               <li key={index}>
                 <div className="book">

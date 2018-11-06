@@ -123,12 +123,13 @@ body, .app {
   padding: 80px 10px 20px;
 }
 
-.recommended-text {
+.result-message {
   margin: 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  font-size: 20;
+  font-size: 20px !important;
+  color: #2e7d32;
 }
 
 /* Shlef Manager Page */
