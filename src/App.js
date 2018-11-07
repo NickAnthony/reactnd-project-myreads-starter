@@ -70,8 +70,8 @@ class BooksApp extends React.Component {
       this.setState({
         books: bookList
       })
-      for (var book in bookList) {
-        this.handleAddShelf(book.shelf)
+      for (var index in bookList) {
+        this.handleAddShelf(bookList[index].shelf)
       }
     })
   }
